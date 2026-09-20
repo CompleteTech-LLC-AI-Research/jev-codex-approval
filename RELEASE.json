@@ -1,0 +1,26 @@
+{
+  "name": "jev-codex-approval",
+  "version": "0.1.0",
+  "build_date": "2026-09-20",
+  "kind": "experimental-reference-implementation",
+  "python_test_count": 71,
+  "python_tests_passed": true,
+  "scripted_replay_cases": 24,
+  "scripted_replay_expectations_matched": 24,
+  "native_rust_tests_included": 5,
+  "native_rust_tests_executed": false,
+  "native_codex_build_verified": false,
+  "live_typesafe_inference_performed": false,
+  "jev_guardian_performance_comparison_performed": false,
+  "user_machine_modified": false,
+  "remote_repository_modified": false,
+  "python_source_files": 23,
+  "python_build_environment": "3.13.5",
+  "codex_source_pin": "c45ea25ffb72d5f7324489d824d0c677283aa0b4",
+  "runtime_dependencies": "Python 3.11+ standard library",
+  "limits": [
+    "Native Rust adapter requires real build/integration validation.",
+    "Mock fixture results are not semantic model benchmarks.",
+    "No production threshold, speedup, or safety guarantee is asserted."
+  ]
+}

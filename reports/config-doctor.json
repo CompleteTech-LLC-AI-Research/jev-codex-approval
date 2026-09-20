@@ -1,0 +1,11 @@
+{
+  "mode": "shadow",
+  "model": "jev-1.13.0",
+  "remote_context_authorized": false,
+  "api_key_present": false,
+  "daemon_selected": false,
+  "question_set_approved": false,
+  "approved_policy_count": 0,
+  "audit_configured": false,
+  "live_provider_test_performed": false
+}

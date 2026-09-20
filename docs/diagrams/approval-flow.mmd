@@ -1,0 +1,74 @@
+---
+config:
+  theme: base
+  themeVariables:
+    fontFamily: 'Inter, Segoe UI, Arial, sans-serif'
+    fontSize: 15px
+    primaryTextColor: '#172033'
+    lineColor: '#64748b'
+  flowchart:
+    curve: basis
+    nodeSpacing: 35
+    rankSpacing: 50
+---
+flowchart TB
+    USER["User intent and existing policy"] --> AGENT["Codex agent<br/>proposes an exact tool action"]
+    AGENT --> BASE["EXISTING · deterministic rules<br/>permissions and approval-stage selection"]
+    BASE -->|"Already permitted"| EXEC
+    BASE -->|"Approval required"| HOOK["EXISTING · PermissionRequest hooks"]
+    HOOK -->|"Existing hook allow"| EXEC
+    HOOK -->|"Existing hook deny"| REJECT
+    HOOK -->|"No hook decision"| ROUTE["EXISTING · Guardian routing<br/>and eligible V2 evidence"]
+    ROUTE -->|"Valid existing fast approval"| EXEC
+    ROUTE -->|"Manual review selected"| HUMAN
+    ROUTE -->|"Synchronous review needed"| PREP["EXISTING · bind action and authorization<br/>prepare review and emit started event"]
+
+    subgraph CHANGE["CHANGED · synchronous review attempt"]
+        direction TB
+        GUARD["NEW · JEV eligibility check<br/>mandatory / fresh / retry / escalation remain Guardian-owned"]
+        SNAP["NEW ADAPTER · reuse Codex evidence builder<br/>effective policy + retained provenance + exact action"]
+        BUDGET["NEW · privacy and completeness gate<br/>no silent truncation · explicit remote consent"]
+        CLIENT["NEW · bounded Python transport<br/>direct HTTPS or authenticated localhost service"]
+        JEV["JEV / SYSTEM ONE<br/>4 Choice questions + 6 Noul questions"]
+        TYPED["NEW · validate every typed answer<br/>model pin · distributions · confidence · hazards"]
+        POLICY["NEW · deterministic decision policy<br/>audited policy/question pins + opt-in tool categories"]
+        JCHECK["NEW · additional freshness validation<br/>current local/root authorization and effective policy"]
+        GUARD -->|"Eligible"| SNAP --> BUDGET --> CLIENT --> JEV --> TYPED --> POLICY
+        POLICY -->|"Proposed allow or opt-in deny"| JCHECK
+    end
+
+    PREP --> GUARD
+    GUARD -->|"Not eligible"| GUARDIAN
+    BUDGET -->|"Incomplete / private / oversized"| GUARDIAN
+    CLIENT -->|"Timeout / unavailable"| GUARDIAN
+    TYPED -->|"Malformed / model drift"| GUARDIAN
+    POLICY -->|"Defer or shadow mode"| GUARDIAN
+    JCHECK -->|"Stale"| GUARDIAN
+    JCHECK -->|"Still valid"| ORIGINAL
+    GUARDIAN["UNCHANGED FALLBACK · Guardian reviewer<br/>read-only investigation and contextual reasoning"] --> ORIGINAL
+    ORIGINAL["UNCHANGED · original authorization check<br/>reporting, denial accounting and cancellation"] --> RESULT{"Host review result"}
+    RESULT -->|"Approved"| EXEC["EXISTING · final permission enforcement<br/>then execute the bound action"]
+    RESULT -->|"Denied / cancelled"| REJECT["Reject or abort<br/>no reviewed action executed"]
+    RESULT -->|"User fallback permitted by policy"| HUMAN["EXISTING · user approval UI"]
+    HUMAN -->|"Approve"| EXEC
+    HUMAN -->|"Decline"| REJECT
+    EXEC --> TOOLRESULT["Tool result"] --> AGENT
+
+    POLICY -.-> AUDIT["NEW · metadata-only audit<br/>review ID · pins · vector · candidate · decision"]
+    ORIGINAL -.-> HOSTLOG["EXISTING · Guardian assessment events"]
+    AUDIT -.-> EVAL["NEW · offline paired comparison<br/>independent labels + frozen calibration proposals"]
+    HOSTLOG -.-> EVAL
+
+    classDef existing fill:#eef2f7,stroke:#94a3b8,color:#172033,stroke-width:1.5px;
+    classDef changed fill:#ede9fe,stroke:#7c3aed,color:#4c1d95,stroke-width:3px;
+    classDef model fill:#5b21b6,stroke:#c4b5fd,color:#ffffff,stroke-width:3px;
+    classDef fallback fill:#fff7ed,stroke:#ea580c,color:#7c2d12,stroke-width:2px;
+    classDef enforce fill:#ecfdf5,stroke:#059669,color:#064e3b,stroke-width:2px;
+    classDef stop fill:#fff1f2,stroke:#e11d48,color:#881337,stroke-width:2px;
+    class USER,AGENT,BASE,HOOK,ROUTE,PREP,ORIGINAL,TOOLRESULT,HOSTLOG existing;
+    class GUARD,SNAP,BUDGET,CLIENT,TYPED,POLICY,JCHECK,AUDIT,EVAL changed;
+    class JEV model;
+    class GUARDIAN,HUMAN fallback;
+    class EXEC enforce;
+    class REJECT stop;
+    style CHANGE fill:#faf5ff,stroke:#a78bfa,stroke-width:2px

@@ -1,0 +1,33 @@
+---
+config:
+  theme: base
+  themeVariables:
+    fontFamily: 'Segoe UI, Arial, sans-serif'
+---
+flowchart LR
+    subgraph HOST["TRUSTED HOST · outside agent-writable workspace"]
+        CODEX["Patched Codex host"]
+        LAUNCH["Absolute Python executable<br/>-I + absolute package launcher"]
+        CFG["Owner-controlled TOML<br/>audited policy / question pins"]
+        AUDIT["Owner-only metadata audit"]
+        CODEX --> LAUNCH
+        CFG --> LAUNCH
+        LAUNCH --> DIRECT["Direct HTTPS client"]
+        LAUNCH -->|"Optional: bearer-authenticated loopback"| SERVICE["Persistent local review service<br/>bounded concurrency + circuit breaker"]
+        DIRECT --> AUDIT
+        SERVICE --> AUDIT
+    end
+    subgraph REMOTE["EXTERNAL PROCESSOR · explicit consent required"]
+        TS["api.typesafe.ai<br/>version-pinned JEV"]
+    end
+    DIRECT -->|"HTTPS · redirects disabled"| TS
+    SERVICE -->|"HTTPS · API key stays in service environment"| TS
+    TS -->|"Typed answer vector"| HOST
+    subgraph WORKSPACE["AGENT WORKSPACE · untrusted evidence"]
+        FILES["Repository files, tool output and proposed arguments"]
+    end
+    FILES -.->|"Evidence only; cannot set policy"| CODEX
+    classDef new fill:#ede9fe,stroke:#7c3aed,color:#4c1d95,stroke-width:3px;
+    classDef remote fill:#ffedd5,stroke:#ea580c,color:#7c2d12,stroke-width:2px;
+    class LAUNCH,CFG,AUDIT,DIRECT,SERVICE new;
+    class TS remote;

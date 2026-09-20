@@ -1,0 +1,11 @@
+# NOT deployment-ready. Thresholds require independent workload validation.
+# These conspicuous invalid pins deliberately prevent accidental activation.
+mode = "enforce"
+model = "jev-1.13.0"
+allow_remote_context = false
+fast_allow_tools = ["exec_command"]
+enable_fast_deny = false
+approved_policy_hashes = ["REPLACE_WITH_AUDITED_EFFECTIVE_POLICY_SHA256"]
+approved_question_hash = "REPLACE_WITH_AUDITED_QUESTION_SET_SHA256"
+audit_path = "REPLACE_WITH_ABSOLUTE_OWNER_ONLY_AUDIT_PATH"
+require_audit = true

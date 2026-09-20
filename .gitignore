@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+build/
+dist/
+.env
+.env.*
+!.env.example
+*.local.toml
+*.jsonl.local
+adapters/codex-native/target/

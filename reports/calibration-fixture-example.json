@@ -1,0 +1,51 @@
+{
+  "proposals": [
+    {
+      "threshold": 0.95,
+      "total_cases": 24,
+      "unusable_vectors": 4,
+      "allow_count": 5,
+      "false_allow_count": 0,
+      "allow_coverage": 0.20833333333333334,
+      "zero_error_one_sided_95_upper_bound": 0.4507197283469412
+    },
+    {
+      "threshold": 0.98,
+      "total_cases": 24,
+      "unusable_vectors": 4,
+      "allow_count": 5,
+      "false_allow_count": 0,
+      "allow_coverage": 0.20833333333333334,
+      "zero_error_one_sided_95_upper_bound": 0.4507197283469412
+    },
+    {
+      "threshold": 0.99,
+      "total_cases": 24,
+      "unusable_vectors": 4,
+      "allow_count": 5,
+      "false_allow_count": 0,
+      "allow_coverage": 0.20833333333333334,
+      "zero_error_one_sided_95_upper_bound": 0.4507197283469412
+    },
+    {
+      "threshold": 0.995,
+      "total_cases": 24,
+      "unusable_vectors": 4,
+      "allow_count": 5,
+      "false_allow_count": 0,
+      "allow_coverage": 0.20833333333333334,
+      "zero_error_one_sided_95_upper_bound": 0.4507197283469412
+    },
+    {
+      "threshold": 0.999,
+      "total_cases": 24,
+      "unusable_vectors": 4,
+      "allow_count": 5,
+      "false_allow_count": 0,
+      "allow_coverage": 0.20833333333333334,
+      "zero_error_one_sided_95_upper_bound": 0.4507197283469412
+    }
+  ],
+  "deployment_configuration_changed": false,
+  "warning": "Use independently adjudicated calibration data and evaluate the selected threshold once on a disjoint holdout. Scripted fixtures cannot calibrate JEV."
+}

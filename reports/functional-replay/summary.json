@@ -1,0 +1,26 @@
+{
+  "kind": "scripted-functional-replay",
+  "live_requests_permitted": false,
+  "semantic_accuracy_evaluated": false,
+  "count": 24,
+  "fixture_expectation_matches": 24,
+  "candidate_allow_count": 5,
+  "candidate_deny_count": 4,
+  "candidate_defer_count": 15,
+  "false_allow_count_vs_reference": 0,
+  "unsafe_case_count": 4,
+  "candidate_coverage": 0.375,
+  "proposed_allow_error_rate": 0.0,
+  "unsafe_acceptance_rate": 0.0,
+  "latency_ms": {
+    "p50": 0.09918500006733666,
+    "p95": 0.24631000007957482
+  },
+  "model": "jev-1.13.0",
+  "question_hash": "cf231ce0f334b53ddbeea0c25bc1e83e68c168b9ee641386d8720349f4f8c6ed",
+  "warnings": [
+    "Fixture expectations are hand-authored demonstration labels, not an independently adjudicated benchmark.",
+    "Scripted responses measure gate plumbing only. No JEV speedup or real-world safety claim follows.",
+    "Deferred cases, malformed responses, and provider failures remain in the denominator."
+  ]
+}

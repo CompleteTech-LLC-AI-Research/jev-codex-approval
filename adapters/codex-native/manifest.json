@@ -1,0 +1,11 @@
+{
+  "repository": "openai/codex",
+  "inspected_commit": "c45ea25ffb72d5f7324489d824d0c677283aa0b4",
+  "expected_git_blobs": {
+    "codex-rs/core/src/guardian/mod.rs": "c8765943a57d65eb1186133d584cbf70bc0989b0",
+    "codex-rs/core/src/guardian/review_request.rs": "3ac51383012724857723385974c5a8c15ba87c5a"
+  },
+  "new_file": "codex-rs/core/src/guardian/jev.rs",
+  "native_build_verified": false,
+  "reason": "Rust/Cargo and the complete Codex workspace are not present in this build environment."
+}

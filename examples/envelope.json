@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "request_id": "test-request-1",
+  "source": "codex-native",
+  "action": {
+    "tool": "exec_command",
+    "command": [
+      "pwd"
+    ],
+    "cwd": "/workspace"
+  },
+  "context": {
+    "policy": {
+      "guardian_instructions": "Allow routine bounded local reads within the trusted user task. Deny unauthorized destructive operations or sensitive disclosure. Unknown evidence requires review."
+    },
+    "messages": [
+      {
+        "role": "user",
+        "text": "Show the current directory."
+      }
+    ],
+    "authorization_revision": "revision-1"
+  },
+  "guards": {
+    "context_complete": true,
+    "mandatory_review": false,
+    "fresh_review": false,
+    "retry": false,
+    "escalated": false,
+    "cancelled": false,
+    "authorization_current": true
+  }
+}

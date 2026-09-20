@@ -1,0 +1,8 @@
+This is an independent reference implementation, not an official OpenAI or TypeSafe release.
+OpenAI, Codex, TypeSafe, System One and JEV are names of their respective providers.
+No model weights, credentials, proprietary documentation bundles, or font files are distributed.
+The source-transform installer contains short contextual fragments identifying the existing
+Codex inference call and transforms the user's own checkout. The Codex checkout retains
+its upstream license and notices. Consult its license before redistributing a modified binary.
+The MIT license in this package covers the newly authored package code and documentation;
+it does not relicense the upstream Codex project or provider services.

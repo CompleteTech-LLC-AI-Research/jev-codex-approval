@@ -1,0 +1,27 @@
+# Copy OUTSIDE the agent-writable workspace; chmod 600 on POSIX.
+# Nothing is sent to TypeSafe until allow_remote_context is explicitly enabled.
+mode = "shadow"
+model = "jev-1.13.0"
+allow_remote_context = false
+endpoint = "https://api.typesafe.ai/v1/systemone"
+timeout_seconds = 1.0
+max_state_bytes = 24000
+max_response_bytes = 64000
+min_confidence = 0.98
+min_probability = 0.995
+max_hazard = 0.005
+deny_confidence = 0.99
+deny_probability = 0.999
+fast_allow_tools = ["exec_command", "apply_patch"]
+enable_fast_deny = false
+approved_policy_hashes = []
+approved_question_hash = ""
+# Set an absolute path in an owner-only directory; required before any fast decision.
+audit_path = ""
+require_audit = true
+breaker_failures = 3
+breaker_seconds = 15.0
+# Optional persistent service. Both client and service must be configured to enforce
+# before an enforced result can pass through the client.
+daemon_url = ""
+daemon_token_env = "JEV_APPROVAL_TOKEN"

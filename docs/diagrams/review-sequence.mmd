@@ -1,0 +1,35 @@
+---
+config:
+  theme: neutral
+---
+sequenceDiagram
+    autonumber
+    participant C as Codex host
+    participant S as Existing review preparation
+    participant J as NEW JEV adapter
+    participant P as NEW local policy engine
+    participant T as TypeSafe API
+    participant G as Existing Guardian
+    participant E as Existing enforcement
+    C->>S: Capture one immutable action and authorization revision
+    S->>J: Review attempt with cancellation and deadline
+    alt Eligible, complete, consented snapshot
+        J->>P: Exact action, effective policy and provenance-bearing evidence
+        P->>T: One request: state + independent typed questions
+        T-->>P: Choice distributions/confidence and Noul values
+        P->>P: Validate, apply deterministic thresholds and write audit
+        P-->>J: Bound candidate and effective decision
+        J->>J: Recheck policy and local/root authorization
+    else Mandatory / fresh / retry / escalation / unsupported
+        J-->>S: No JEV decision
+    end
+    alt JEV abstains, shadow mode, fails, or becomes stale
+        S->>G: Original synchronous review
+        G-->>S: Original structured assessment
+    else Valid eligible JEV result
+        J-->>S: GuardianAssessment through existing host path
+    end
+    S->>S: Original stale-authorization and cancellation check
+    S-->>C: Existing reporting and final review result
+    C->>E: Enforce permissions before any execution
+    Note over C,E: A classifier output is not a sandbox bypass or proof of execution.

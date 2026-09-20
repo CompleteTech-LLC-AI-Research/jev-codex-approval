@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jev-codex-approval"
+version = "0.1.0"
+description = "Opt-in JEV approval preflight with Codex Guardian fallback"
+requires-python = ">=3.11"
+dependencies = []
+license = {text = "MIT"}
+
+[project.scripts]
+jev-approval = "jev_approval.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["jev_approval*"]

@@ -1,0 +1,6 @@
+# Merge manually into the appropriate trusted Codex config layer.
+# Existing administrator requirements continue to apply.
+approval_policy = "on-request"
+approvals_reviewer = "auto_review"
+# This does NOT disable or change your existing permission profile / sandbox.
+# Native JEV launch settings are environment variables, not upstream Codex keys.
