@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/banner.jpg" alt="A teal beam splits into blue, amber and violet question shapes, converges through a gate arch and continues to a terminal in an observatory night sky." width="100%"></p>
+
 <div align="center">
 
 # JEV × Codex
